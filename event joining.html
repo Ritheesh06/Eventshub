@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Registration</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #EEF2FF, #E0E7FF);
+      color: #333;
+    }
+
+    header {
+      background: rgba(61, 47, 47, 0.267);
+      background: rgb(49, 49, 49); 
+      color: rgb(252, 251, 251);
+      padding: 1.5rem 0;
+      text-align: center;
+      font-size: 1.8rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    .event-header {
+      background: #6a11cb;
+      color: white;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .event-header img {
+      max-width: 100%;
+      border-radius: 10px;
+    }
+
+    .event-header h2 {
+      margin-top: 1rem;
+      font-size: 2rem;
+    }
+
+    .event-header p {
+      margin: 0.5rem 0;
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .qr-section {
+      text-align: center;
+      margin: 2rem;
+    }
+
+    .qr-section img {
+      max-width: 200px;
+      margin: 1rem 0;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    form {
+      padding: 2rem;
+      background: #f7f7f7;
+    }
+
+    form h3 {
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+      color: #333;
+    }
+
+    form label {
+      display: block;
+      margin: 0.5rem 0;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    form input, form select {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0 1rem;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    form button {
+      width: 100%;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 5px;
+      background: linear-gradient(to right, #6a11cb, #2575fc);
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    form button:hover {
+      background: linear-gradient(to right, #5a0db6, #206ce2);
+    }
+
+    .back-btn {
+      display: block;
+      text-align: center;
+      margin: 1rem 0;
+      color: #6a11cb;
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #f1f1f1;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Event Registration</h1>
+</header>
+
+<div class="container">
+  <div class="event-header">
+    <img id="eventPoster" src="" alt="Event Poster">
+    <h2 id="eventName"></h2>
+    <p id="eventCategory"></p>
+    <p id="eventDescription"></p>
+  </div>
+
+  <div class="qr-section">
+    <h3>Event QR Code</h3>
+    <img id="qrCode" src="" alt="QR Code for Event">
+  </div>
+
+  <form id="registrationForm">
+    <h3>Register for this Event</h3>
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" placeholder="Enter your full name" required>
+
+    <label for="rollNumber">Roll Number:</label>
+    <input type="text" id="rollNumber" name="rollNumber" placeholder="Enter your roll number" required>
+
+    <label for="branch">Branch:</label>
+    <select id="branch" name="branch" required>
+      <option value="" disabled selected>Select your branch</option>
+      <option value="Computer Science">Computer Science</option>
+      <option value="Mechanical Engineering">Mechanical Engineering</option>
+      <option value="Electrical Engineering">Electrical Engineering</option>
+      <option value="Civil Engineering">Civil Engineering</option>
+      <option value="Electronics & Communication">Electronics & Communication</option>
+      <option value="Information Technology">Information Technology</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <label for="year">Year of Pursuing:</label>
+    <select id="year" name="year" required>
+      <option value="" disabled selected>Select your year</option>
+      <option value="1st Year">1st Year</option>
+      <option value="2nd Year">2nd Year</option>
+      <option value="3rd Year">3rd Year</option>
+      <option value="4th Year">4th Year</option>
+    </select>
+
+    <label for="email">Email Address:</label>
+    <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+    <button type="submit">Submit Registration</button>
+  </form>
+
+  <a href="http://127.0.0.1:5503/events.html" class="back-btn">&larr; Back to Events</a>
+</div>
+
+<footer>
+  <p>&copy; 2024 Event Hub. All Rights Reserved.</p>
+</footer>
+
+<script>
+  // Retrieve query parameters from URL
+  const params = new URLSearchParams(window.location.search);
+  const eventName = params.get("name");
+  const eventCategory = params.get("category");
+  const eventDescription = params.get("description");
+  const eventPoster = params.get("poster");
+  const eventQrCode = params.get("qr");
+
+  // Populate event details
+  document.getElementById("eventName").textContent = eventName;
+  document.getElementById("eventCategory").textContent = `Category: ${eventCategory}`;
+  document.getElementById("eventDescription").textContent = eventDescription;
+  document.getElementById("eventPoster").src = eventPoster;
+  document.getElementById("qrCode").src = eventQrCode;
+
+  // Handle form submission
+  document.getElementById("registrationForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const formData = {
+      fullName: document.getElementById("fullName").value,
+      rollNumber: document.getElementById("rollNumber").value,
+      branch: document.getElementById("branch").value,
+      year: document.getElementById("year").value,
+      email: document.getElementById("email").value,
+    };
+
+    fetch('http://localhost:3000/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      alert("Registration Successful!");
+      this.reset(); // Clear the form after submission
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('Registration failed. Please try again.');
+    });
+  });
+</script>
+
+</body>
+</html>
+

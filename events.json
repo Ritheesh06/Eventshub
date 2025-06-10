@@ -1,0 +1,50 @@
+[
+  {
+    "name": "TechFest 2024",
+    "date": "2024-12-15",
+    "time": "10:00 AM",
+    "venue": "Main Auditorium",
+    "eligibility": "Open to all tech enthusiasts",
+    "description": "A day of tech talks, workshops, and exhibitions.",
+    "registrationFee": "http://example.com/fee-qr-code",
+    "limitedParticipants": "yes",
+    "eventType": "competition",
+    "poster": "http://example.com/images/techfest-poster.jpg"
+  },
+  {
+    "name": "TechFest 2024",
+    "date": "2024-12-15",
+    "time": "10:00 AM",
+    "venue": "Main Auditorium",
+    "eligibility": "Open to all tech enthusiasts",
+    "description": "A day of tech talks, workshops, and exhibitions.",
+    "registrationFee": null,
+    "limitedParticipants": "yes",
+    "eventType": "competition",
+    "poster": "http://example.com/images/techfest-poster.jpg"
+  },
+  {
+    "name": "TechFest 2024",
+    "date": "2024-12-15",
+    "time": "10:00 AM",
+    "venue": "Main Auditorium",
+    "eligibility": "Open to all tech enthusiasts",
+    "description": "A day of tech talks, workshops, and exhibitions.",
+    "registrationFee": "http://example.com/fee-qr-code",
+    "limitedParticipants": "yes",
+    "eventType": "competition",
+    "poster": "http://example.com/images/techfest-poster.jpg"
+  },
+  {
+    "name": "TechFest 2024",
+    "date": "2024-12-15",
+    "time": "10:00 AM",
+    "venue": "Main Auditorium",
+    "eligibility": "Open to all tech enthusiasts",
+    "description": "A day of tech talks, workshops, and exhibitions.",
+    "registrationFee": "http://example.com/fee-qr-code",
+    "limitedParticipants": "yes",
+    "eventType": "competition",
+    "poster": "http://example.com/images/techfest-poster.jpg"
+  }
+]

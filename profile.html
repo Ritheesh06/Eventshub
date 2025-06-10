@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Events Hub - Organizer Profile</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: #f9fafb;
+            min-height: 100vh;
+        }
+
+        nav {
+            background-color: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 1rem;
+            height: 4rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .avatar {
+            width: 2rem;
+            height: 2rem;
+            background-color: #2563eb;
+            color: white;
+            border-radius: 9999px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .main-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 1.5rem;
+        }
+
+        .sidebar {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+            border-radius: 0.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-item:hover {
+            background-color: #f9fafb;
+        }
+
+        .sidebar-item.logout {
+            color: #dc2626;
+        }
+
+        .main-content {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .profile-field {
+            margin-bottom: 1rem;
+        }
+
+        .field-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #4b5563;
+            margin-bottom: 0.25rem;
+        }
+
+        .field-value {
+            background-color: #f9fafb;
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+        }
+
+        .button {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .event-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .event-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+        }
+
+        .event-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .event-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        .event-description {
+            font-size: 0.875rem;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        .event-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo-section">
+                <i data-lucide="graduation-cap" style="color: #2563eb;"></i>
+                <span class="logo-text">College Events Hub</span>
+            </div>
+            <div class="user-section">
+                <i data-lucide="bell"></i>
+                <i data-lucide="menu"></i>
+                <div class="avatar">J</div>
+                <span>John Doe</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="grid-layout">
+            <div class="sidebar">
+                <div class="sidebar-item">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </div>
+                <div class="sidebar-item">
+                    <i data-lucide="calendar"></i>
+                    <span>Events</span>
+                </div>
+                <div class="sidebar-item">
+                    <i data-lucide="users"></i>
+                    <span>Members</span>
+                </div>
+                <div class="sidebar-item">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="sidebar-item logout">
+                    <i data-lucide="log-out"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">Profile Information</h2>
+                
+                <div class="profile-grid">
+                    <div>
+                        <div class="profile-field">
+                            <div class="field-label">First Name</div>
+                            <div class="field-value">John</div>
+                        </div>
+                        <div class="profile-field">
+                            <div class="field-label">Last Name</div>
+                            <div class="field-value">Doe</div>
+                        </div>
+                        <div class="profile-field">
+                            <div class="field-label">Email</div>
+                            <div class="field-value">john.doe@example.com</div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="profile-field">
+                            <div class="field-label">Branch</div>
+                            <div class="field-value">Computer Science</div>
+                        </div>
+                        <div class="profile-field">
+                            <div class="field-label">Year</div>
+                            <div class="field-value">Third Year</div>
+                        </div>
+                        <div class="profile-field">
+                            <div class="field-label">Club</div>
+                            <div class="field-value">Tech Club (TC)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 1.5rem;">
+                    <button class="button">Edit Profile</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

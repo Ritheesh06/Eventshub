@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Hub</title>
+    <style>
+        /* General styles here */
+        /* Header and Navigation */
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .cta-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+        .logout-button {
+            background-color: #dc3545; /* Red color for logout */
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 1rem; /* Adds spacing between buttons */
+        }
+
+        .logout-button:hover {
+             background-color: #c82333;
+        }
+
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 3rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            margin-right: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-image {
+            flex: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 3rem;
+        }
+
+        .events h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .event-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        /* See More Button */
+          .see-more {
+          text-align: center;
+          margin-top: 3rem;
+        }
+          .see-more-button {
+          background-color: #28a745;
+          color: #fff;
+          border: none;
+          padding: 1rem 2rem;
+          border-radius: 0.25rem;
+          font-size: 1.1rem;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.see-more-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+        }
+
+        .modal-close {
+            cursor: pointer;
+            font-size: 1.5rem;
+            border: none;
+            background: none;
+        }
+
+        .modal form label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal form input,
+        .modal form textarea,
+        .modal form select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+        }
+
+        .modal form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+        .modal form button:hover {
+            background-color: #0056b3;
+        }
+
+        #qrCodeUpload {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <nav class="nav-bar">
+        <a href="#" class="logo">Event Hub</a>
+        <ul class="nav-links">
+            <li><a href="http://127.0.0.1:5503/public/organ.html">Home</a></li>
+            <li><a href="http://127.0.0.1:5503/events.html">Events</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div>
+            <button class="cta-button" id="createEventBtn">Create Event</button>
+            <button class="logout-button" id="logoutBtn">Logout</button>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elevate Your Event Experience</h1>
+            <p>Discover, create, and enjoy events with us.</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://i.ytimg.com/vi/sACYkyYi7os/sddefault.jpg" alt="Event Hero Image">
+        </div>
+    </section>
+
+    <section class="events">
+        <h2>Upcoming Events</h2>
+        <div class="event-cards" id="eventCards"></div>
+    </section>
+    <div class="see-more">
+        <button class="see-more-button">See More Events</button>
+      </div>
+</main>
+
+<footer class="footer">
+    <p>© 2024 Event Hub. All rights reserved.</p>
+</footer>
+
+<!-- Modal -->
+<div class="modal" id="createEventModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Create Event</h3>
+            <button class="modal-close" id="closeModal">×</button>
+        </div>
+        <form id="createEventForm">
+            <div id="PosterUpload">
+                <label for="posterupload">Upload poster</label>
+                <input type="file" id="posterupload" accept="image/*">
+              </div>
+            
+          
+            <script>
+              function toggleQRUpload() {
+                const registrationFee = document.getElementById('posterupload').value;
+                const PosterUpload = document.getElementById('PosterUpload');
+          
+               
+              }
+            </script>
+            <label for="eventName">Event Name</label>
+            <input type="text" id="eventName" required>
+            <label for="eventDate">Event Date</label>
+            <input type="date" id="eventDate" required>
+            <label for="eventTime">Event Time</label>
+            <input type="time" id="eventTime" required>
+            <label for="type of event">Type of event</label>
+            <select id="type of event" required>
+                <option value="competition">Competition </option>
+                <option value="fun event">Fun event</option>
+                <option value="Others">Others(i.e. seminars, webinars etc..)</option>
+
+            </select>
+            <label for="eventVenue">Venue</label>
+            <input type="text" id="eventVenue" required>
+            <label for="eligibilityCriteria">Eligibility Criteria</label>
+            <select id="eligibilityCriteria" required>
+                <option value="only First years">Only First Years</option>
+                <option value="only Second years">Only Second Years</option>
+                <option value="only third years">Only Third Years</option>
+                <option value="only fourth years">Only Fourth Years</option>
+                <option value="for everyone">For Everyone</option>
+            </select>
+            <label for="eventDescription">Event Description</label>
+            <textarea id="eventDescription" rows="4" required></textarea>
+            <label for="limitedParticipants">Limited Participants?</label>
+            <select id="limitedParticipants">
+                <option value="No">No</option>
+                <option value="Yes">Yes</option>
+            </select>
+            <label for="registrationFee">Registration Fee?</label>
+            <select id="registrationFee" onchange="toggleQRUpload()">
+              <option value="No">No</option>
+              <option value="Yes">Yes</option>
+            </select>
+        
+            <div id="qrCodeUpload">
+              <label for="registrationQR">Upload Registration Fee QR Code</label>
+              <input type="file" id="registrationQR" accept="image/*">
+            </div>
+          
+        
+          <script>
+            function toggleQRUpload() {
+              const registrationFee = document.getElementById('registrationFee').value;
+              const qrCodeUpload = document.getElementById('qrCodeUpload');
+        
+              if (registrationFee === 'Yes') {
+                qrCodeUpload.style.display = 'block';
+              } else {
+                qrCodeUpload.style.display = 'none';
+              }
+            }
+          </script>
+            <button type="submit">Create Event</button>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+        // Redirect to goog.html
+        window.location.href = 'goog.html';
+    });
+</script>
+
+<script>
+    const createEventModal = document.getElementById('createEventModal');
+    const createEventBtn = document.getElementById('createEventBtn');
+    const closeModal = document.getElementById('closeModal');
+    const eventCards = document.getElementById('eventCards');
+
+    const preloadedEvents = [
+        {
+            name: "TechFest 2024",
+            date: "2024-12-15",
+            time: "10:00 AM",
+            venue: "Main Auditorium",
+            location: "Tech City",
+            eligibility: "Open to all tech enthusiasts.",
+            description: "A day of tech talks, workshops, and exhibitions.",
+            limitedParticipants: "No",
+            registrationFee: "Yes",
+            poster: "https://tse1.mm.bing.net/th?id=OIP.ZGSHzO9EDkv11q925EhruAHaD3&pid=Api&P=0&h=220",
+    
+        },
+        {
+            name: "Art Expo",
+            date: "2024-11-25",
+            time: "2:00 PM",
+            venue: "Gallery Hall",
+            location: "Creative City",
+            eligibility: "Artists and art lovers.",
+            description: "Explore unique art pieces and meet the artists.",
+            limitedParticipants: "No",
+            registrationFee: "No",
+            poster: "https://cdn.filepicker.io/api/file/PS1kjXuxQWuAUEk3y5sQ",
+        
+        },
+        {
+            name: "Startup Pitch Fest",
+            date: "2024-12-05",
+            time: "9:00 AM",
+            venue: "Innovation Hub",
+            location: "Business District",
+            eligibility: "Startups and investors.",
+            description: "Showcase your startup ideas and get funding.",
+            limitedParticipants: "Yes",
+            registrationFee: "Yes",
+            poster: "https://i.ytimg.com/vi/zezNH9NVjLw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD_F_2o4QzU3aKEdFQQkHfAt51COg",
+            
+        }
+    ];
+
+    function loadPreloadedEvents() {
+        preloadedEvents.forEach(event => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${event.poster}" alt="${event.name}">
+                <div class="card-content">
+                    <h3>${event.name}</h3>
+                    <p>${event.date} | ${event.time}</p>
+                    <p>${event.venue}, ${event.location}</p>
+                    <p><b>Eligibility:</b> ${event.eligibility}</p>
+                    <p><b>Description:</b> ${event.description}</p>
+                    <p><b>Limited Participants:</b> ${event.limitedParticipants}</p>
+                    <p><b>Registration Fee:</b> ${event.registrationFee}</p>
+                    ${
+                        event.qrCode
+                            ? `<p><b>QR Code:</b><br><img src="${event.qrCode}" alt="QR Code" style="max-width: 100px;"></p>`
+                            : ''
+                    }
+                    
+                </div>
+            `;
+            eventCards.appendChild(card);
+        });
+    }
+
+    createEventBtn.addEventListener('click', () => {
+        createEventModal.classList.add('active');
+    });
+
+    closeModal.addEventListener('click', () => {
+        createEventModal.classList.remove('active');
+    });
+
+    loadPreloadedEvents();
+</script>
+<script>
+    // Handle form submission
+    document.getElementById('createEventForm').addEventListener('submit', async (e) => {
+        e.preventDefault(); // Prevent default form submission
+
+        const eventName = document.getElementById('eventName').value;
+        const eventDate = document.getElementById('eventDate').value;
+        const eventTime = document.getElementById('eventTime').value;
+        const eventType = document.getElementById('type of event').value;
+        const eventVenue = document.getElementById('eventVenue').value;
+        const eligibilityCriteria = document.getElementById('eligibilityCriteria').value;
+        const eventDescription = document.getElementById('eventDescription').value;
+        const limitedParticipants = document.getElementById('limitedParticipants').value;
+        const registrationFee = document.getElementById('registrationFee').value;
+        
+        // Handle file uploads (poster and QR code)
+        const poster = document.getElementById('posterupload').files[0];
+        const qrCode = document.getElementById('registrationQR').files[0];
+
+        // Use FormData for files and other form fields
+        const formData = new FormData();
+        formData.append('name', eventName);
+        formData.append('date', eventDate);
+        formData.append('time', eventTime);
+        formData.append('type', eventType);
+        formData.append('venue', eventVenue);
+        formData.append('eligibility', eligibilityCriteria);
+        formData.append('description', eventDescription);
+        formData.append('limitedParticipants', limitedParticipants);
+        formData.append('registrationFee', registrationFee);
+        if (poster) formData.append('poster', poster);
+        if (qrCode) formData.append('qrCode', qrCode);
+
+        try {
+    console.log("Submitting form...");
+
+    // Send form data to the server
+    const response = await fetch('/api/events', {
+        method: 'POST',
+        body: formData,
+    });
+
+    console.log("Response status:", response.status);
+
+    // Check response status
+    if (!response.ok) {
+        throw new Error(`Server error: ${response.status} ${response.statusText}`);
+    }
+
+    console.log("Processing server response...");
+
+    // Handle server response
+    const contentType = response.headers.get('content-type');
+    console.log("Content type:", contentType);
+
+    if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        console.log("Server response data:", data);
+        alert('Event created successfully!');
+    } else {
+        alert('Event created, but the server returned an unexpected response.');
+    }
+
+    // Close modal and reset form
+    const createEventModal = document.getElementById('createEventModal');
+    if (createEventModal) createEventModal.classList.remove('active');
+    document.getElementById('createEventForm').reset();
+
+} catch (error) {
+    console.error('Error submitting the form:', error);
+    alert(`An error occurred: ${error.message}`);
+}
+
+</script>
+
+</body>
+</html>

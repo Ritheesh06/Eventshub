@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Hub</title>
+  <style>
+    .header {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    nav {
+      margin: 1rem;
+      text-align: center;
+    }
+
+    nav button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      background-color: #0056b3;
+    }
+
+    .event-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 25%;
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+    }
+
+    .card button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <header class="header">
+      <nav class="nav-bar">
+        <a href="#" class="logo">Event Hub</a>
+        <ul class="nav-links">
+          <li><a href="http://127.0.0.1:5503/public/organ.html">Home</a></li>
+          <li><a href="http://127.0.0.1:5503/events.html">Events</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+
+      </nav>
+    </header>
+
+
+    <nav>
+      <button onclick="filterEvents('all')">All</button>
+      <button onclick="filterEvents('fun')">Fun Events</button>
+      <button onclick="filterEvents('competitions')">Competitions</button>
+      <button onclick="filterEvents('webinars')">Webinars & Seminars</button>
+    </nav>
+
+    <section class="event-cards" id="eventCards">
+      <!-- Event cards will be dynamically loaded here -->
+    </section>
+
+    <script>
+      const events = [
+        {
+          id: 1,
+          name: "Music Festival",
+          category: "fun",
+          poster: "https://cdn2.allevents.in/thumbs/thumb6583f1cb1e3bb.jpg", // Ensure this image exists
+          description: "A grand music festival with live performances.",
+        },
+        {
+          id: 2,
+          name: "Hackathon",
+          category: "competitions",
+          poster: "event-image-2.jpg", // Ensure this image exists
+          description: "Compete with the best minds in our 24-hour hackathon.",
+        },
+        {
+          id: 3,
+          name: "Tech Webinar",
+          category: "webinars",
+          poster: "event-image-3.jpg", // Ensure this image exists
+          description: "Learn the latest tech trends from industry leaders.",
+        },
+      ];
+
+      const eventCards = document.getElementById("eventCards");
+
+      function filterEvents(category) {
+        eventCards.innerHTML = "";
+        const filteredEvents =
+          category === "all" ? events : events.filter(event => event.category === category);
+
+        filteredEvents.forEach(event => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+        <img src="${event.poster}" alt="${event.name}">
+        <h3>${event.name}</h3>
+        <p>${event.description}</p>
+        <button onclick="openEventDetails(${event.id})">Join</button>
+      `;
+          eventCards.appendChild(card);
+        });
+      }
+
+      function openEventDetails(eventId) {
+        const event = events.find(event => event.id === eventId);
+        const queryParams = new URLSearchParams({
+          id: event.id,
+          name: event.name,
+          category: event.category,
+          description: event.description,
+          poster: event.poster,
+        }).toString();
+        window.location.href = `http://127.0.0.1:5503/joinnnn.html?${queryParams}`;
+      }
+
+      // Default load all events
+      filterEvents("all");
+    </script>
+
+  </body>
+
+</html>

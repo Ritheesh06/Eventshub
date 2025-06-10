@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Hub</title>
+    <style>
+        /* General styles here */
+        /* Header and Navigation */
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .cta-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #333;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #575757;
+        }
+
+        /* Button Container */
+        .button-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem; /* Adds space between buttons */
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 3rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            margin-right: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-image {
+            flex: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 3rem;
+        }
+
+        .events h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .event-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        /* See More Button */
+        .see-more {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .see-more-button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 0.25rem;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .see-more-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <nav class="nav-bar">
+        <a href="#" class="logo">Event Hub</a>
+        <ul class="nav-links">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="button-container">
+            <div class="dropdown">
+                <button class="cta-button">Menu</button>
+                <div class="dropdown-content">
+                    <a href="#">Profile</a>
+                    <a href="#">My Events</a>
+                    <a href="#">Reviews</a>
+                    <a href="#">Logout</a>
+                </div>
+            </div>
+            <button class="cta-button" id="createEventBtn">Create Event</button>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elevate Your Event Experience</h1>
+            <p>Discover, create, and enjoy events with us.</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://i.ytimg.com/vi/sACYkyYi7os/sddefault.jpg" alt="Event Hero Image">
+        </div>
+    </section>
+
+    <section class="events">
+        <h2>Upcoming Events</h2>
+        <div class="event-cards" id="eventCards">
+            <!-- Sample Event Card 1 -->
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Event 1">
+                <div class="card-content">
+                    <h3>Music Fest</h3>
+                    <p>Join us for an evening of live music and great vibes.</p>
+                </div>
+            </div>
+            <!-- Sample Event Card 2 -->
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Event 2">
+                <div class="card-content">
+                    <h3>Art Exhibition</h3>
+                    <p>Explore stunning art pieces from talented artists.</p>
+                </div>
+            </div>
+            <!-- Sample Event Card 3 -->
+            <div class="card">
+                <img src="https://via.placeholder.com/400x200" alt="Event 3">
+                <div class="card-content">
+                    <h3>Food Carnival</h3>
+                    <p>Savor delicious dishes from around the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="see-more">
+        <button class="see-more-button">See More Events</button>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>© 2024 Event Hub. All rights reserved.</p>
+</footer>
+</body>
+</html>

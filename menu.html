@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>College Events Hub - Organizer Profile</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+    <style>
+        /* Basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f3f4f6;
+            min-height: 100vh;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        nav {
+            background-color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem 2rem;
+        }
+
+        .nav-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .logo-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2563eb;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .menu {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .menu-item {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #374151;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            text-decoration: underline;
+            color: #2563eb;
+        }
+
+        .avatar {
+            width: 2.5rem;
+            height: 2.5rem;
+            background-color: #2563eb;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        .main-container {
+            max-width: 1280px;
+            margin: 2rem auto;
+            padding: 1rem;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr 3fr;
+            gap: 2rem;
+        }
+
+        .sidebar {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            cursor: pointer;
+            border-radius: 0.375rem;
+            margin-bottom: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-item:hover {
+            background-color: #f9fafb;
+        }
+
+        .sidebar-item.logout {
+            color: #dc2626;
+        }
+
+        .main-content {
+            background-color: #ffffff;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 2fr 3fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .profile-pic-container {
+            text-align: center;
+        }
+
+        .profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #2563eb;
+            margin-bottom: 1rem;
+        }
+
+        .profile-field {
+            margin-bottom: 1.25rem;
+        }
+
+        .field-label {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #4b5563;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-field {
+            background-color: #f9fafb;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid #e5e7eb;
+            font-size: 1rem;
+            width: 100%;
+            color: #374151;
+        }
+
+        .button {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.375rem;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #1d4ed8;
+        }
+
+        .reviews {
+            margin-top: 2rem;
+        }
+
+        .reviews h2 {
+            font-size: 1.25rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .review-card {
+            background-color: white;
+            border-radius: 0.5rem;
+            padding: 1.25rem;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .review-header {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 1.125rem;
+        }
+
+        .review-body {
+            font-size: 1rem;
+            color: #374151;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo-section">
+                <i data-lucide="graduation-cap" style="color: #2563eb;"></i>
+                <span class="logo-text">College Events Hub</span>
+            </div>
+            <div class="menu">
+                <span class="menu-item">Home</span>
+                <span class="menu-item">My Events</span>
+                <span class="menu-item">Contact Us</span>
+            </div>
+            <div class="user-section">
+                <i data-lucide="bell"></i>
+                <div class="avatar" id="navbarAvatar">
+                    <img id="navbarAvatarImage" src="https://via.placeholder.com/50" alt="Profile Picture" class="avatar-img">
+                </div>
+                <span id="username">John Doe</span>
+                <span id="email">johndoe@example.com</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <div class="grid-layout">
+            <div class="sidebar">
+                <div class="sidebar-item">
+                    <i data-lucide="user"></i>
+                    <span>Profile</span>
+                </div>
+                <div class="sidebar-item">
+                    <i data-lucide="calendar"></i>
+                    <span>Events</span>
+                </div>
+                <div class="sidebar-item">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </div>
+                <div class="sidebar-item logout">
+                    <i data-lucide="log-out"></i>
+                    <span>Logout</span>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <h2 style="font-size: 1.75rem; font-weight: bold; margin-bottom: 1.5rem;" id="profileTitle">Edit Profile</h2>
+                
+                <div class="profile-grid">
+                    <div class="profile-pic-container">
+                        <img src="https://via.placeholder.com/200" alt="Profile Picture" id="profilePic" class="profile-pic">
+                        <input type="file" id="profilePicInput" class="input-field" style="display: none;" accept="image/*" onchange="updateProfilePic()">
+                        <button class="button" onclick="document.getElementById('profilePicInput').click()">Change Picture</button>
+                    </div>
+
+                    <div>
+                        <div class="profile-field">
+                            <div class="field-label">First Name</div>
+                            <input type="text" id="firstNameInput" class="input-field" value="John" disabled>
+                        </div>
+                        <div class="profile-field">
+                            <div class="field-label">Last Name</div>
+                            <input type="text" id="lastNameInput" class="input-field" value="Doe" disabled>
+                        </div>
+                        <div class="profile-field">
+                            <div class="field-label">Email</div>
+                            <input type="email" id="emailInput" class="input-field" value="johndoe@example.com" disabled>
+                        </div>
+
+                        <button class="button" id="editButton" onclick="editProfile()">Edit Profile</button>
+                        <button class="button" id="saveButton" style="display:none;" onclick="saveChanges()">Save Changes</button>
+                    </div>
+                </div>
+
+                <div class="reviews">
+                    <h2>Reviews</h2>
+                    <div class="review-card">
+                        <div class="review-header">Great Event!</div>
+                        <div class="review-body">This event was amazing! Great speakers and networking opportunities.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateProfilePic() {
+            const file = document.getElementById('profilePicInput').files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    // Update the profile picture in both the profile section and navbar
+                    document.getElementById('profilePic').src = e.target.result;
+                    document.getElementById('navbarAvatarImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function editProfile() {
+            // Enable the input fields for editing
+            document.getElementById('firstNameInput').disabled = false;
+            document.getElementById('lastNameInput').disabled = false;
+            document.getElementById('emailInput').disabled = false;
+
+            // Change the button to "Save Changes"
+            document.getElementById('editButton').style.display = 'none';
+            document.getElementById('saveButton').style.display = 'inline-block';
+        }
+
+        function saveChanges() {
+            const firstName = document.getElementById('firstNameInput').value;
+            const lastName = document.getElementById('lastNameInput').value;
+            const email = document.getElementById('emailInput').value;
+
+            if (firstName && lastName && email) {
+                // Update the profile data
+                document.getElementById('firstNameInput').disabled = true;
+                document.getElementById('lastNameInput').disabled = true;
+                document.getElementById('emailInput').disabled = true;
+
+                // Update the username and email on the navbar
+                document.getElementById('username').textContent = `${firstName} ${lastName}`;
+                document.getElementById('email').textContent = email;
+
+                // Hide the save button and show the edit button
+                document.getElementById('saveButton').style.display = 'none';
+                document.getElementById('editButton').style.display = 'inline-block';
+            }
+        }
+    </script>
+</body>
+</html>

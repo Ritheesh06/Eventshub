@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Hub</title>
+  <style>
+    .header {
+      background-color: #333;
+      color: #fff;
+      padding: 1rem;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-decoration: none;
+      color: #fff;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 1rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    nav {
+      margin: 1rem;
+      text-align: center;
+    }
+
+    nav button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      background-color: #0056b3;
+    }
+
+    .event-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .card img {
+      width: 25%;
+      border-radius: 10px;
+    }
+
+    .card h3 {
+      margin: 0.5rem 0;
+    }
+
+    .card button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .card button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+
+<body>
+
+  <body>
+    <header class="header">
+      <nav class="nav-bar">
+        <a href="#" class="logo">Event Hub</a>
+        <ul class="nav-links">
+          <li><a href="http://127.0.0.1:5503/public/participants.html">Home</a></li>
+          <li><a href="http://127.0.0.1:5503/events.html">Events</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+
+      </nav>
+    </header>
+
+
+    <nav>
+      <button onclick="filterEvents('all')">All</button>
+      <button onclick="filterEvents('fun')">Fun Events</button>
+      <button onclick="filterEvents('competitions')">Competitions</button>
+      <button onclick="filterEvents('webinars')">Webinars & Seminars</button>
+    </nav>
+
+    <section class="event-cards" id="eventCards">
+      <!-- Event cards will be dynamically loaded here -->
+    </section>
+
+    <script>
+      const events = [
+        {
+          id: 1,
+          name: "Music Festival",
+          category: "fun",
+          poster: "data:image/jpeg;base64,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", // Ensure this image exists
+          description: "A grand music festival with live performances.",
+        },
+        {
+          id: 2,
+          name: "Hackathon",
+          category: "competitions",
+          poster: "event-image-2.jpg", // Ensure this image exists
+          description: "Compete with the best minds in our 24-hour hackathon.",
+        },
+        {
+          id: 3,
+          name: "Tech Webinar",
+          category: "webinars",
+          poster: "event-image-3.jpg", // Ensure this image exists
+          description: "Learn the latest tech trends from industry leaders.",
+        },
+      ];
+
+      const eventCards = document.getElementById("eventCards");
+
+      function filterEvents(category) {
+        eventCards.innerHTML = "";
+        const filteredEvents =
+          category === "all" ? events : events.filter(event => event.category === category);
+
+        filteredEvents.forEach(event => {
+          const card = document.createElement("div");
+          card.className = "card";
+          card.innerHTML = `
+        <img src="${event.poster}" alt="${event.name}">
+        <h3>${event.name}</h3>
+        <p>${event.description}</p>
+        <button onclick="openEventDetails(${event.id})">Join</button>
+      `;
+          eventCards.appendChild(card);
+        });
+      }
+
+      function openEventDetails(eventId) {
+        const event = events.find(event => event.id === eventId);
+        const queryParams = new URLSearchParams({
+          id: event.id,
+          name: event.name,
+          category: event.category,
+          description: event.description,
+          poster: event.poster,
+        }).toString();
+        window.location.href = `http://127.0.0.1:5503/joinnnn.html?${queryParams}`;
+      }
+
+      // Default load all events
+      filterEvents("all");
+    </script>
+
+  </body>
+
+</html>

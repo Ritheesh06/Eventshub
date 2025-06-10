@@ -1,0 +1,90 @@
+{
+  "participants": [
+    {
+      "fullName": "Alice Johnson",
+      "email": "alice@example.com",
+      "password": "password123",
+      "role": "participant",
+      "branch": "Electronics",
+      "year": "2nd"
+    },
+
+    {
+      "fullName": "Alidfce Johnson",
+      "email": "alicxve@example.com",
+      "password": "password123",
+      "role": "participant",
+      "branch": "Electronics",
+      "year": "2nd"
+    },
+
+    {
+      "fullName": "Samson Binny",
+      "email": "SBinny@example.com",
+      "password": "password123",
+      "role": "participant",
+      "branch": "Mechanical",
+      "year": "2nd"
+    },
+
+    {
+      "fullName": "Samson Binny",
+      "email": "Snny@example.com",
+      "password": "password123",
+      "role": "participant",
+      "branch": "Mechanical",
+      "year": "3nd"
+    }
+  ],
+  "organizers": [
+    {},
+    {
+      "email": "lsaichaira@gmail.com"
+    },
+    {
+      "email": "surya@gmail.com"
+    },
+    {
+      "email": "surya1@gmail.com"
+    },
+    {
+      "email": "suryaj1@gmail.com"
+    },
+    {
+      "email": "surasdyaj1@gmail.com"
+    },
+    {
+      "email": "surauyysdyaj1@gmail.com"
+    },
+    {
+      "email": "surauyysdSCyaj1@gmail.com"
+    },
+    {
+      "email": "surasyttedtydyaj1@gmail.com"
+    },
+    {
+      "fullName": "Bob Williams",
+      "email": "bob@example.com",
+      "password": "securepass",
+      "role": "organizer",
+      "clubName": "Tech Club",
+      "department": "Engineering"
+    },
+    {
+      "fullName": "Bob Williams",
+      "email": "bosaffb@example.com",
+      "password": "securepass",
+      "role": "organizer",
+      "clubName": "Tech2 Club",
+      "department": "Engineering"
+    },
+    {
+      "fullName": "Bob Williams",
+      "email": "bosafdsdfb@example.com",
+      "password": "securepass",
+      "role": "organizer",
+      "clubName": "Tecxzh2 Club",
+      "department": "Engineering"
+    }
+  ]
+}

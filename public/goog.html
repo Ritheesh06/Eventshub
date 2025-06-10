@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Login</title>
+  <style>
+ body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #e0f2fe, #ffffff);
+  font-family: 'Arial', sans-serif;
+  padding: 16px;
+  margin: 0;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  text-align: center;
+  padding: 24px;
+  border-bottom: 1px solid #f3f4f6;
+  background: #f9fafb;
+}
+
+.card-header .icon-container {
+  display: inline-flex;
+  padding: 14px;
+  background: #dbeafe;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.card-header h1 {
+  font-size: 1.75rem;
+  font-weight: bold;
+  color: #1e293b;
+  margin: 0;
+}
+
+.card-header p {
+  font-size: 1rem;
+  color: #64748b;
+  margin: 8px 0 0;
+}
+
+.card-content {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 1rem;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.flex a {
+  font-size: 0.9rem;
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.flex a:hover {
+  text-decoration: underline;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  color: #475569;
+}
+
+.checkbox-label input {
+  margin-right: 8px;
+}
+
+.button {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: #3b82f6;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.button:hover {
+  background: #2563eb;
+}
+
+.button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+}
+
+.divider span {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin: 0 12px;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e5e7eb;
+}
+
+.social-buttons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.social-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background: white;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.social-button:hover {
+  background: #f3f4f6;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.9rem;
+  color: #64748b;
+}
+
+.footer a {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+#loader {
+  text-align: center;
+  font-weight: bold;
+  color: #2563EB;
+  margin-top: 1rem;
+}
+
+.hidden {
+  display: none;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="card-header">
+      <div class="icon-container">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="32" height="32">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5.121 17.804A2.993 2.993 0 015 17V6a3 3 0 013-3h8a3 3 0 013 3v11a3 3 0 01-.121.804M9 14h6m-3 0v4"></path>
+        </svg>
+      </div>
+      <h1>Participant Portal</h1>
+      <p>Securely access your event participation dashboard</p>
+    </div>
+	 </div>
+    <div class="card-content">
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select id="role">
+          <option value="participant">Participant</option>
+          <option value="organizer">Organizer</option>
+        </select>
+    <div class="card-content">
+      <div class="form-group">			  
+        <label for="email">Email Address</label>
+        <input type="email" id="email" placeholder="john.doe@vnrvjiet.in">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" placeholder="Enter your password">
+      </div>
+      <div class="flex">
+        <label class="checkbox-label">
+          <input type="checkbox"> Remember me
+        </label>
+        <a href="#">Forgot password?</a>
+      </div>
+      <button class="button" id="loginBtn">Login</button>
+      <div id="message"></div>
+
+      <div class="divider">
+        <span>or continue with</span>
+      </div>
+      <div class="social-buttons">
+        <div class="social-button">
+          <span>Facebook</span>
+        </div>
+        <div class="social-button">
+          <span>Google</span>
+        </div>
+        <div class="social-button">
+          <span>GitHub</span>
+        </div>
+      </div>
+      <div class="footer">
+        <p>Don't have an account? <a href="http://127.0.0.1:5501/public/Untitled-1.html">Register here</a></p>
+        <p>By signing in, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.getElementById('loginBtn').addEventListener('click', async function (e) {
+      e.preventDefault();
+
+      const role = document.getElementById('role').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      if (!role || !email || !password) {
+        alert('All fields are required!');
+        return;
+      }
+
+      try {
+        const response = await fetch('http://localhost:3000/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ role, email, password }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          alert(data.message);
+          if (role === 'organizer') {
+            window.location.href = 'organ.html';
+          } else if (role === 'participant') {
+            window.location.href = 'participants.html';
+          }
+        } else {
+          document.getElementById('message').innerText = data.message;
+        }
+											
+														 
+      } catch (error) {
+        console.error('Error:', error);
+        document.getElementById('message').innerText = 'An error occurred. Please try again later.';								
+      }
+    });
+  </script>
+  
+  
+</body>
+</html>

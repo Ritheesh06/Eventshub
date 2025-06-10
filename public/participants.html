@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Hub</title>
+    <style>
+        /* General styles here */
+        /* Header and Navigation */
+        .header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+        }
+
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+        .logout-button {
+            background-color: #dc3545; /* Red color for logout */
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-left: 1rem; /* Adds spacing between buttons */
+        }
+
+        .logout-button:hover {
+             background-color: #c82333;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f9fa;
+            padding: 3rem;
+        }
+
+        .hero-content {
+            flex: 1;
+            margin-right: 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-image {
+            flex: 1;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+        }
+
+        /* Events Section */
+        .events {
+            padding: 3rem;
+        }
+
+        .events h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .event-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 0.5rem;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        /* See More Button */
+          .see-more {
+          text-align: center;
+          margin-top: 3rem;
+        }
+          .see-more-button {
+          background-color: #28a745;
+          color: #fff;
+          border: none;
+          padding: 1rem 2rem;
+          border-radius: 0.25rem;
+          font-size: 1.1rem;
+          cursor: pointer;
+          transition: background-color 0.3s ease, transform 0.2s ease;
+}
+.see-more-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-header h3 {
+            margin: 0;
+        }
+
+        .modal-close {
+            cursor: pointer;
+            font-size: 1.5rem;
+            border: none;
+            background: none;
+        }
+
+        .modal form label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal form input,
+        .modal form textarea,
+        .modal form select {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.25rem;
+        }
+
+        .modal form button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.25rem;
+            cursor: pointer;
+        }
+
+        .modal form button:hover {
+            background-color: #0056b3;
+        }
+
+        #qrCodeUpload {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-content {
+                margin-right: 0;
+                margin-bottom: 2rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                margin: 1rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+<header class="header">
+    <nav class="nav-bar">
+        <a href="#" class="logo">Event Hub</a>
+        <ul class="nav-links">
+            <li><a href="http://127.0.0.1:5503/public/organ.html">Home</a></li>
+            <li><a href="http://127.0.0.1:5503/events2.html">Events</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div>
+            <button class="logout-button" id="logoutBtn">Logout</button>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Elevate Your Event Experience</h1>
+            <p>Discover, create, and enjoy events with us.</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://i.ytimg.com/vi/sACYkyYi7os/sddefault.jpg" alt="Event Hero Image">
+        </div>
+    </section>
+
+    <section class="events">
+        <h2>Upcoming Events</h2>
+        <div class="event-cards" id="eventCards"></div>
+    </section>
+    <div class="see-more">
+        <button class="see-more-button">See More Events</button>
+      </div>
+</main>
+
+<footer class="footer">
+    <p>© 2024 Event Hub. All rights reserved.</p>
+</footer>
+<script>
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+        // Redirect to goog.html
+        window.location.href = 'goog.html';
+    });
+</script>
+<script>
+    const createEventModal = document.getElementById('createEventModal');
+    const createEventBtn = document.getElementById('createEventBtn');
+    const closeModal = document.getElementById('closeModal');
+    const eventCards = document.getElementById('eventCards');
+
+    const preloadedEvents = [
+        {
+            name: "TechFest 2024",
+            date: "2024-12-15",
+            time: "10:00 AM",
+            venue: "Main Auditorium",
+            location: "Tech City",
+            eligibility: "Open to all tech enthusiasts.",
+            description: "A day of tech talks, workshops, and exhibitions.",
+            limitedParticipants: "No",
+            registrationFee: "Yes",
+            poster: "data:image/png;base64,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",
+    
+        },
+        {
+            name: "Art Expo",
+            date: "2024-11-25",
+            time: "2:00 PM",
+            venue: "Gallery Hall",
+            location: "Creative City",
+            eligibility: "Artists and art lovers.",
+            description: "Explore unique art pieces and meet the artists.",
+            limitedParticipants: "No",
+            registrationFee: "No",
+            poster: "https://cdn.filepicker.io/api/file/PS1kjXuxQWuAUEk3y5sQ",
+        
+        },
+        {
+            name: "Startup Pitch Fest",
+            date: "2024-12-05",
+            time: "9:00 AM",
+            venue: "Innovation Hub",
+            location: "Business District",
+            eligibility: "Startups and investors.",
+            description: "Showcase your startup ideas and get funding.",
+            limitedParticipants: "Yes",
+            registrationFee: "Yes",
+            poster: "https://i.ytimg.com/vi/zezNH9NVjLw/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLD_F_2o4QzU3aKEdFQQkHfAt51COg",
+            
+        }
+    ];
+
+    function loadPreloadedEvents() {
+        preloadedEvents.forEach(event => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <img src="${event.poster}" alt="${event.name}">
+                <div class="card-content">
+                    <h3>${event.name}</h3>
+                    <p>${event.date} | ${event.time}</p>
+                    <p>${event.venue}, ${event.location}</p>
+                    <p><b>Eligibility:</b> ${event.eligibility}</p>
+                    <p><b>Description:</b> ${event.description}</p>
+                    <p><b>Limited Participants:</b> ${event.limitedParticipants}</p>
+                    <p><b>Registration Fee:</b> ${event.registrationFee}</p>
+                    ${
+                        event.qrCode
+                            ? `<p><b>QR Code:</b><br><img src="${event.qrCode}" alt="QR Code" style="max-width: 100px;"></p>`
+                            : ''
+                    }
+                    
+                </div>
+            `;
+            eventCards.appendChild(card);
+        });
+    }
+
+    createEventBtn.addEventListener('click', () => {
+        createEventModal.classList.add('active');
+    });
+
+    closeModal.addEventListener('click', () => {
+        createEventModal.classList.remove('active');
+    });
+
+    loadPreloadedEvents();
+</script>
+</body>
+</html>
